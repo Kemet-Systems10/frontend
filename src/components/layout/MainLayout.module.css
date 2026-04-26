@@ -1,0 +1,34 @@
+.layout {
+  min-height: 100vh;
+  background-color: #f8fafc;
+  display: flex;
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+  padding: 24px;
+}
+
+.menuButton {
+  display: none;
+  margin-bottom: 16px;
+  border: none;
+  background-color: #ff6b00;
+  color: #fff;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-weight: 600;
+}
+
+@media (max-width: 992px) {
+  .content {
+    padding: 16px;
+  }
+
+  .menuButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
