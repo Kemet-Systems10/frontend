@@ -7,10 +7,11 @@ import { Link } from "react-router-dom";
 import style from "./Register.module.css";
 
 import { z } from "zod";
+import { axiosInstance } from "../../../api/axiosInstance";
 
 const schema = z
   .object({
-    userName: z.string().min(1, "User name is required"),
+    name: z.string().min(1, "User name is required"),
     email: z.string().email("Invalid email"),
     password: z.string().min(6, "Password must be at least 6 characters"),
     confirmPassword: z.string(),
@@ -29,8 +30,13 @@ const Register = () => {
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      const response = await axiosInstance.post("/auth/register", data);
+      console.log(response.data.token);
+    } catch (error) {
+      console.log(error.response.data.error);
+    }
   };
 
   return (
@@ -50,7 +56,7 @@ const Register = () => {
         <div className={` ${style["register-card"]} text-center p-4 shadow`}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-3 text-start">
-              <label className="form-label fs-14">Full Name</label>
+              <label className="form-label fs-14">name</label>
               <div className="input-group">
                 <span className="input-group-text bg-white">
                   <BiUser />
@@ -58,12 +64,12 @@ const Register = () => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="user Name"
-                  {...register("userName")}
+                  placeholder="name"
+                  {...register("name")}
                 />
               </div>
-              {errors.userName && (
-                <small className="text-danger">{errors.userName.message}</small>
+              {errors.name && (
+                <small className="text-danger">{errors.name.message}</small>
               )}
             </div>
 

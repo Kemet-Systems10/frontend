@@ -2,15 +2,19 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { CiUser } from "react-icons/ci";
 import { FaEnvelope, FaLock } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
+import { axiosInstance } from "../../../api/axiosInstance";
+import { getDefaultPathByRole } from "../../../Routers/ProtectedRoute";
 import style from "./Login.module.css";
+
 const schema = z.object({
   email: z.string().email("Invalid email"),
   password: z.string().min(6, "Password must be at least 6 characters"),
 });
 
 const Login = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -19,14 +23,27 @@ const Login = () => {
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      const response = await axiosInstance.post("/auth/login", data);
+      const token = response.data?.token;
+      if (token) {
+        localStorage.setItem("token", token);
+      }
+      const role = response.data?.user?.role;
+      if (role) {
+        localStorage.setItem("role", role);
+      }
+
+      navigate(getDefaultPathByRole(role), { replace: true });
+    } catch (error) {
+      console.log(error.response.data.error);
+    }
   };
 
   return (
     <div
-      className={`d-flex justify-content-center align-items-center ${style["login-page"]}`}
-    >
+      className={`d-flex justify-content-center align-items-center ${style["login-page"]}`}>
       <div className={`${style.authContent} text-center`}>
         <div className="info">
           <div className={`${style.logo} mb-3`}>
@@ -75,7 +92,9 @@ const Login = () => {
               )}
             </div>
 
-            <button type="submit" className="btn text-white btn-orange w-100 mb-3">
+            <button
+              type="submit"
+              className="btn text-white btn-orange w-100 mb-3">
               Login
             </button>
           </form>
