@@ -1,7 +1,7 @@
-import { useState } from "react";
-import styles from "./Categories.module.css";
+import { useState } from 'react';
+import styles from './Categories.module.css';
 
-const categories = ["All", "Burgers", "Drinks", "Meals", "Sides", "Desserts"];
+const categories = ['All', 'Burgers', 'Drinks', 'Meals', 'Sides', 'Desserts'];
 
 const Categories = () => {
   const [active, setActive] = useState(0);
@@ -10,7 +10,7 @@ const Categories = () => {
       {categories.map((cat, i) => (
         <button
           key={i}
-          className={`${styles.pill} ${i === active ? styles.active : ""}`}
+          className={`${styles.pill} ${i === active ? styles.active : ''}`}
           onClick={() => setActive(i)}
         >
           {cat}

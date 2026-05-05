@@ -1,24 +1,25 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { BiUser } from "react-icons/bi";
-import { CiUser } from "react-icons/ci";
-import { FaEnvelope, FaLock } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import style from "./Register.module.css";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { BiUser } from 'react-icons/bi';
+import { CiUser } from 'react-icons/ci';
+import { FaEnvelope, FaLock } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import style from './Register.module.css';
 
-import { z } from "zod";
-import { axiosInstance } from "../../../api/axiosInstance";
+import { toast } from 'react-toastify';
+import { z } from 'zod';
+import { axiosInstance } from '../../../api/axiosInstance';
 
 const schema = z
   .object({
-    name: z.string().min(1, "User name is required"),
-    email: z.string().email("Invalid email"),
-    password: z.string().min(6, "Password must be at least 6 characters"),
+    name: z.string().min(1, 'User name is required'),
+    email: z.string().email('Invalid email'),
+    password: z.string().min(6, 'Password must be at least 6 characters'),
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords do not match",
-    path: ["confirmPassword"],
+    message: 'Passwords do not match',
+    path: ['confirmPassword'],
   });
 
 const Register = () => {
@@ -32,17 +33,15 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axiosInstance.post("/auth/register", data);
-      console.log(response.data.token);
+      const res = await axiosInstance.post('/auth/register', data);
+      toast.success(res.data.message);
     } catch (error) {
-      console.log(error.response.data.error);
+      toast.error(error.response.data.error);
     }
   };
 
   return (
-    <div
-      className={`d-flex justify-content-center align-items-center ${style["register-page"]}`}
-    >
+    <div className={`d-flex justify-content-center align-items-center ${style['register-page']}`}>
       <div className={`${style.authContent} text-center`}>
         <div className="info">
           <div className={`${style.logo} mb-3`}>
@@ -53,7 +52,7 @@ const Register = () => {
           <p className="text-muted small">Join Restaurant POS today</p>
         </div>
 
-        <div className={` ${style["register-card"]} text-center p-4 shadow`}>
+        <div className={` ${style['register-card']} text-center p-4 shadow`}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-3 text-start">
               <label className="form-label fs-14">name</label>
@@ -65,12 +64,10 @@ const Register = () => {
                   type="text"
                   className="form-control"
                   placeholder="name"
-                  {...register("name")}
+                  {...register('name')}
                 />
               </div>
-              {errors.name && (
-                <small className="text-danger">{errors.name.message}</small>
-              )}
+              {errors.name && <small className="text-danger">{errors.name.message}</small>}
             </div>
 
             <div className="mb-3 text-start">
@@ -79,15 +76,9 @@ const Register = () => {
                 <span className="input-group-text bg-white">
                   <FaEnvelope />
                 </span>
-                <input
-                  type="email"
-                  className="form-control"
-                  {...register("email")}
-                />
+                <input type="email" className="form-control" {...register('email')} />
               </div>
-              {errors.email && (
-                <small className="text-danger">{errors.email.message}</small>
-              )}
+              {errors.email && <small className="text-danger">{errors.email.message}</small>}
             </div>
 
             <div className="mb-3 text-start">
@@ -96,15 +87,9 @@ const Register = () => {
                 <span className="input-group-text  bg-white">
                   <FaLock />
                 </span>
-                <input
-                  type="password"
-                  className="form-control"
-                  {...register("password")}
-                />
+                <input type="password" className="form-control" {...register('password')} />
               </div>
-              {errors.password && (
-                <small className="text-danger">{errors.password.message}</small>
-              )}
+              {errors.password && <small className="text-danger">{errors.password.message}</small>}
             </div>
             <div className="mb-3 text-start">
               <label className="form-label fs-14">Confirm Password</label>
@@ -112,16 +97,10 @@ const Register = () => {
                 <span className="input-group-text  bg-white">
                   <FaLock />
                 </span>
-                <input
-                  type="password"
-                  className="form-control"
-                  {...register("confirmPassword")}
-                />
+                <input type="password" className="form-control" {...register('confirmPassword')} />
               </div>
               {errors.confirmPassword && (
-                <small className="text-danger">
-                  {errors.confirmPassword.message}
-                </small>
+                <small className="text-danger">{errors.confirmPassword.message}</small>
               )}
             </div>
 
@@ -131,7 +110,7 @@ const Register = () => {
           </form>
 
           <p className="small mb-0">
-            Already have an account?{" "}
+            Already have an account?{' '}
             <Link to="/auth" className="text-orange">
               Sign in
             </Link>

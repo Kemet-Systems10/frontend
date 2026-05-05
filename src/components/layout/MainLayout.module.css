@@ -12,13 +12,13 @@
 
 .menuButton {
   display: none;
-  margin-bottom: 16px;
   border: none;
   background-color: #ff6b00;
-  color: #fff;
   border-radius: 8px;
-  padding: 8px 14px;
-  font-weight: 600;
+  padding: 8px;
+  /* font-weight: 600; */
+  width: 30px;
+  height: 30px;
 }
 
 @media (max-width: 992px) {

@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { Outlet } from "react-router-dom";
-import Sidebar from "../shared/Sidebar/Sidebar";
-import styles from "./MainLayout.module.css";
+import { useState } from 'react';
+import { Outlet } from 'react-router-dom';
+import Sidebar from '../shared/Sidebar/Sidebar';
+import styles from './MainLayout.module.css';
 
 const MainLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -11,15 +11,8 @@ const MainLayout = () => {
   return (
     <div className={styles.layout}>
       <Sidebar isOpen={isSidebarOpen} onClose={closeSidebar} />
-      
+
       <main className={styles.content}>
-        <button
-          className={styles.menuButton}
-          type="button"
-          onClick={() => setIsSidebarOpen(true)}
-        >
-          Menu
-        </button>
         <Outlet />
       </main>
     </div>

@@ -8,11 +8,7 @@
 
 .auhLayout {
   background: #ebb15b;
-  background: linear-gradient(
-    196deg,
-    rgba(235, 177, 91, 1) 54%,
-    rgba(255, 247, 237, 1) 100%
-  );
+  background: linear-gradient(196deg, rgba(235, 177, 91, 1) 54%, rgba(255, 247, 237, 1) 100%);
 }
 
 .form-control:focus {
@@ -37,8 +33,11 @@
 
 .btn-orange:hover {
   background: #e14d00;
+  color: #ccc;
 }
-
+.bg-orange {
+  background: #e14d00 !important;
+}
 .text-orange {
   color: #ff5a00;
   cursor: pointer;
@@ -47,4 +46,11 @@
 .active {
   background: #ff6b00;
   color: #fff;
+}
+
+
+.modal {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
 }

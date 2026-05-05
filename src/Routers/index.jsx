@@ -6,6 +6,8 @@ import Login from "../pages/Auth/Login/Login";
 import Register from "../pages/Auth/Register/Register";
 import POS from "../pages/POS/POS";
 import ProtectedRoute from "./ProtectedRoute";
+import Products from "../pages/Products";
+import Categories from "../pages/Categories";
 
 const router = createBrowserRouter([
   {
@@ -33,11 +35,11 @@ const router = createBrowserRouter([
           },
           {
             path: "Products",
-            element: <>Products</>,
+            element: <Products/>,
           },
           {
             path: "Categories",
-            element: <>Categories</>,
+            element: <Categories/>,
           },
           {
             path: "Inventory",

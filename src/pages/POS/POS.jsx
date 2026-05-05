@@ -1,9 +1,9 @@
-import { FaSearch } from "react-icons/fa";
-import Cart from "../../components/Pos/Cart";
-import Categories from "../../components/Pos/Categories";
-import Navbar from "../../components/shared/Navbar/Navbar";
-import ProductsGrid from "../../components/Pos/ProductsGrid";
-import styles from "./POS.module.css";
+import { FaSearch } from 'react-icons/fa';
+import Cart from '../../components/Pos/Cart';
+import Categories from '../../components/Pos/Categories';
+import ProductsGrid from '../../components/Pos/ProductsGrid';
+import Navbar from '../../components/shared/Navbar/Navbar';
+import styles from './POS.module.css';
 
 const POS = () => {
   return (
@@ -13,10 +13,7 @@ const POS = () => {
         <div className={styles.left}>
           <div className={styles.searchWrapper}>
             <FaSearch className={styles.searchIcon} />
-            <input
-              className={styles.searchInput}
-              placeholder="Search products..."
-            />
+            <input className={styles.searchInput} placeholder="Search products..." />
           </div>
           <Categories />
           <ProductsGrid />
