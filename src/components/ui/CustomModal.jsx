@@ -1,4 +1,4 @@
-const CustomModal = ({ show, onClose, title, children, onSave }) => {
+const CustomModal = ({ show, onClose, title, children, onSave, saveText = "Save", formId }) => {
   if (!show) return null;
 
   return (
@@ -14,11 +14,15 @@ const CustomModal = ({ show, onClose, title, children, onSave }) => {
             <div className="modal-body">{children}</div>
 
             <div className="modal-footer">
-              {onSave && (
-                <button className="btn btn-primary" onClick={onSave}>
-                  Save
+              {formId ? (
+                <button type="submit" form={formId} className="btn btn-primary">
+                  {saveText}
                 </button>
-              )}
+              ) : onSave ? (
+                <button type="button" className="btn btn-primary" onClick={onSave}>
+                  {saveText}
+                </button>
+              ) : null}
             </div>
           </div>
         </div>

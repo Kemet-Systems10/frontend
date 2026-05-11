@@ -27,13 +27,16 @@ const Login = () => {
   const onSubmit = async (data) => {
     try {
       const response = await axiosInstance.post('/auth/login', data);
+      console.log();
       const token = response.data?.token;
       if (token) {
         localStorage.setItem('token', token);
       }
       const role = response.data?.user?.role;
+      const userid = response.data.user._id;
       if (role) {
         localStorage.setItem('role', role);
+        localStorage.setItem('userid', userid);
       }
       toast.success(response.data.message);
       navigate(getDefaultPathByRole(role), { replace: true });

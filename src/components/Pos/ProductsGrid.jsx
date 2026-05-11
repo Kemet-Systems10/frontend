@@ -1,24 +1,32 @@
+import { useEffect, useState } from 'react';
+import { axiosInstance } from '../../api/axiosInstance';
 import ProductCard from './ProductCard';
 import styles from './ProductsGrid.module.css';
 
-const products = [
-  { name: 'Classic Burger', price: 8.99 },
-  { name: 'Cheeseburger', price: 9.99 },
-  { name: 'Cola', price: 2.99 },
-  { name: 'Coffee', price: 3.49 },
-  { name: 'Fries', price: 3.99 },
-  { name: 'Onion Rings', price: 4.49 },
-  { name: 'Milkshake', price: 4.99 },
-  { name: 'Ice Cream', price: 3.49 },
-  { name: 'Hot Dog', price: 5.99 },
-  { name: 'Pizza Slice', price: 6.99 },
-];
+const ProductsGrid = ({ onAddToCart, searchTerm = '' }) => {
+  const [products, setProducts] = useState([]);
 
-const ProductsGrid = () => {
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await axiosInstance.get('/products');
+        setProducts(res.data?.products || []);
+      } catch (err) {
+        console.error(err.message || 'Failed to fetch products');
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  const filteredProducts = searchTerm.trim()
+    ? products.filter((p) => p.name.toLowerCase().includes(searchTerm.toLowerCase()))
+    : products;
+
   return (
     <div className={styles.grid}>
-      {products.map((p, i) => (
-        <ProductCard key={i} product={p} />
+      {filteredProducts.map((p, i) => (
+        <ProductCard key={i} product={p} onAddToCart={onAddToCart} />
       ))}
     </div>
   );

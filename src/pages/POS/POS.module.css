@@ -1,21 +1,19 @@
 .wrapper {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   background: #f5f6fa;
-  overflow: hidden;
 }
 
 .body {
   display: flex;
   flex: 1;
-  overflow: hidden;
+  align-items: flex-start;
 }
 
 .left {
   flex: 1;
   padding: 20px;
-  overflow-y: auto;
 }
 
 .searchWrapper {
