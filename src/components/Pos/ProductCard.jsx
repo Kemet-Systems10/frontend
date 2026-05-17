@@ -1,17 +1,15 @@
 import styles from './ProductCard.module.css';
 
-const ProductCard = ({ product, onAddToCart }) => {
-  const handleAddToCart = () => {
-    onAddToCart(product);
-  };
+const imgUrl = 'http://localhost:3000/uploads/product/';
 
+const ProductCard = ({ product, onAddToCart }) => {
   return (
-    <div className={styles.card}>
-      <p className={styles.name}>{product.name}</p>
+    <div className={styles.card} onClick={() => onAddToCart(product)}>
+      <img className={styles.image} src={`${imgUrl}${product.image}`} alt={product.name} />
+
+      <h4 className={styles.name}>{product.name}</h4>
+
       <span className={styles.price}>${product.price}</span>
-      <button className={styles.addBtn} onClick={handleAddToCart}>
-        Add to Cart
-      </button>
     </div>
   );
 };
