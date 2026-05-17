@@ -8,15 +8,11 @@ import POS from "../pages/POS/POS";
 import ProtectedRoute from "./ProtectedRoute";
 import Products from "../pages/Products";
 import Categories from "../pages/Categories";
-<<<<<<< HEAD
 import Inventory from "../pages/Inventory";
 import Orders from "../pages/Orders";
 import Customers from "../pages/Customers";
 import Users from "../pages/Users";
 import Payments from "../pages/Payments";
-=======
-import OrdersPage from "../pages/Order";
->>>>>>> 7cda928b0f12f098315a04e3798356e6a472d4cb
 
 const router = createBrowserRouter([
   {
@@ -44,11 +40,11 @@ const router = createBrowserRouter([
           },
           {
             path: "Products",
-            element: <Products/>,
+            element: <Products />,
           },
           {
             path: "Categories",
-            element: <Categories/>,
+            element: <Categories />,
           },
           {
             path: "Inventory",
@@ -56,11 +52,7 @@ const router = createBrowserRouter([
           },
           {
             path: "Orders",
-<<<<<<< HEAD
             element: <Orders />,
-=======
-            element: <OrdersPage/>,
->>>>>>> 7cda928b0f12f098315a04e3798356e6a472d4cb
           },
           {
             path: "Customers",
