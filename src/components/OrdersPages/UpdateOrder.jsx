@@ -80,10 +80,13 @@ export default function UpdateOrder({
         {/* Status */}
         <label className="form-label fw-bold">Status</label>
         <select className="form-select mb-3" {...register('status')}>
-          <option value="pending">Pending</option>
-          <option value="preparing">Preparing</option>
-          <option value="completed">Completed</option>
-          <option value="cancelled">Cancelled</option>
+          <option value="pending">Pending (قيد الانتظار)</option>
+          <option value="preparing">Preparing (جاري التجهيز)</option>
+          <option value="ready">Ready (جاهز)</option>
+          <option value="out_for_delivery">Out for Delivery (في الطريق)</option>
+          <option value="delivered">Delivered (تم التوصيل)</option>
+          <option value="completed">Completed (مكتمل)</option>
+          <option value="cancelled">Cancelled (ملغي)</option>
         </select>
 
         {/* submit */}

@@ -89,10 +89,10 @@ export default function TableInventory({ activeFilter }) {
           ) : (
             products.map((item) => (
               <tr key={item._id}>
-                <td>{item.name}</td>
+                <td className="fw-medium">{item.productId?.name || item.product?.name || item.name || 'Unknown Product'}</td>
                 <td>
                   <span className={styles.badgeLight}>
-                    {item.categoryId?.name || item.category?.name || 'N/A'}
+                    {item.productId?.category?.name || item.product?.category?.name || item.categoryId?.name || item.category?.name || 'N/A'}
                   </span>
                 </td>
                 <td className={item.stock <= (item.reorderLevel || 20) ? styles.lowStock : ''}>

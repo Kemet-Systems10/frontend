@@ -2,11 +2,39 @@ import { FaEdit, FaTrash } from 'react-icons/fa';
 import styles from './CategoryCard.module.css';
 
 const CategoriesCard = ({ category }) => {
+  const getImageUrl = (img) => {
+    if (!img) return null;
+    if (typeof img === 'object') return img.url || img.secure_url;
+    if (img.startsWith('http')) return img;
+    // Try category (singular) first, if it fails maybe they can see the error
+    return `http://localhost:3000/uploads/categories/${img}`;
+  };
+
+  const imageSrc = getImageUrl(category.image) || getImageUrl(category.photo) || getImageUrl(category.imageUrl);
+
   return (
     <div className={styles.card}>
       {/* top */}
       <div className={styles.top}>
-        <div className={styles.iconBox}>🍔</div>
+        <div className={styles.iconBox}>
+          {imageSrc ? (
+            <img 
+              src={imageSrc} 
+              alt={category.name} 
+              style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '12px' }}
+              onError={(e) => { 
+                // If categories plural fails, try category singular
+                if (e.target.src.includes('/categories/')) {
+                  e.target.src = e.target.src.replace('/categories/', '/category/');
+                } else {
+                  e.target.style.display = 'none'; 
+                  if(e.target.nextSibling) e.target.nextSibling.style.display = 'block'; 
+                }
+              }}
+            />
+          ) : null}
+          <span style={{ display: imageSrc ? 'none' : 'block' }}>🍔</span>
+        </div>
 
         <div className={styles.actions}>
           <FaEdit className={`${styles.icon} ${styles.edit}`} />

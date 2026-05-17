@@ -102,8 +102,15 @@ export default function TableOrders() {
                 <td>{item.paymentMethod}</td>
                 <td>{item.items?.length || 0}</td>
                 <td>
-                  <span className={`${styles.status} ${item.status === 'cancelled' ? 'text-danger' : ''}`}>
-                    {item.status || 'pending'}
+                  <span className={`badge ${
+                    item.status === 'pending' ? 'bg-secondary' :
+                    item.status === 'preparing' ? 'bg-warning text-dark' :
+                    item.status === 'ready' ? 'bg-info text-dark' :
+                    item.status === 'out_for_delivery' ? 'bg-primary' :
+                    (item.status === 'delivered' || item.status === 'completed') ? 'bg-success' :
+                    item.status === 'cancelled' ? 'bg-danger' : 'bg-secondary'
+                  }`}>
+                    {item.status ? item.status.replace(/_/g, ' ').toUpperCase() : 'PENDING'}
                   </span>
                 </td>
                 <td>{new Date(item.createdAt || Date.now()).toLocaleDateString()}</td>

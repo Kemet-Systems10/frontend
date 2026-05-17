@@ -127,13 +127,35 @@ const Cart = ({ cartItems, setCartItems }) => {
     setShowCheckoutModal(true);
   };
 
+  const handleUpdateQuantity = (productId, newQuantity) => {
+    if (newQuantity <= 0) {
+      // Remove item if quantity becomes 0 or less
+      setCartItems((prev) => prev.filter((item) => item.product._id !== productId));
+    } else {
+      // Update quantity
+      setCartItems((prev) =>
+        prev.map((item) =>
+          item.product._id === productId
+            ? { ...item, quantity: newQuantity }
+            : item
+        )
+      );
+    }
+  };
+
+  const handleClearAll = () => {
+    if (window.confirm('Are you sure you want to clear the cart?')) {
+      setCartItems([]);
+    }
+  };
+
   return (
     <div className={styles.cart}>
       {/* Header */}
       <div className={styles.header}>
         <h4 className="mb-0">Current Order</h4>
 
-        <button className={styles.clearBtn}>Clear All</button>
+        <button className={styles.clearBtn} onClick={handleClearAll}>Clear All</button>
       </div>
 
       {/* Cart Items */}
@@ -148,18 +170,28 @@ const Cart = ({ cartItems, setCartItems }) => {
                   <p className={styles.price}>${item.product.price} each</p>
                 </div>
 
-                <FaRegTrashAlt className={styles.deleteIcon} />
+                <FaRegTrashAlt 
+                  className={styles.deleteIcon} 
+                  onClick={() => handleUpdateQuantity(item.product._id, 0)} 
+                  style={{ cursor: 'pointer' }}
+                />
               </div>
 
               <div className="d-flex justify-content-between align-items-center mt-3">
                 <div className={styles.quantityBox}>
-                  <button className={styles.qtyBtn}>
+                  <button 
+                    className={styles.qtyBtn} 
+                    onClick={() => handleUpdateQuantity(item.product._id, item.quantity - 1)}
+                  >
                     <FaMinus />
                   </button>
 
                   <span className={styles.qtyText}>{item.quantity}</span>
 
-                  <button className={styles.qtyBtn}>
+                  <button 
+                    className={styles.qtyBtn} 
+                    onClick={() => handleUpdateQuantity(item.product._id, item.quantity + 1)}
+                  >
                     <FaPlus />
                   </button>
                 </div>
