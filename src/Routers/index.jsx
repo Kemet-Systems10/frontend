@@ -8,6 +8,7 @@ import POS from "../pages/POS/POS";
 import ProtectedRoute from "./ProtectedRoute";
 import Products from "../pages/Products";
 import Categories from "../pages/Categories";
+import OrdersPage from "../pages/Order";
 
 const router = createBrowserRouter([
   {
@@ -47,7 +48,7 @@ const router = createBrowserRouter([
           },
           {
             path: "Orders",
-            element: <>Orders</>,
+            element: <OrdersPage/>,
           },
           {
             path: "Customers",

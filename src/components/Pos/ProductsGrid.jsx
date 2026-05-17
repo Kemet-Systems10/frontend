@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { axiosInstance } from '../../api/axiosInstance';
 import ProductCard from './ProductCard';
-import styles from './ProductsGrid.module.css';
 
 const ProductsGrid = ({ onAddToCart, searchTerm = '' }) => {
   const [products, setProducts] = useState([]);
@@ -24,9 +23,9 @@ const ProductsGrid = ({ onAddToCart, searchTerm = '' }) => {
     : products;
 
   return (
-    <div className={styles.grid}>
-      {filteredProducts.map((p, i) => (
-        <ProductCard key={i} product={p} onAddToCart={onAddToCart} />
+    <div className="d-flex flex-wrap gap-2 p-2">
+      {filteredProducts.map((p) => (
+        <ProductCard key={p._id} product={p} onAddToCart={onAddToCart} />
       ))}
     </div>
   );
