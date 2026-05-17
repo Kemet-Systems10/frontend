@@ -13,8 +13,11 @@ import Orders from "../pages/Orders";
 import Customers from "../pages/Customers";
 import Users from "../pages/Users";
 import Payments from "../pages/Payments";
+<<<<<<< HEAD
 import Dashboard from "../pages/Dashboard";
 import OrdersPage from "../pages/Order";
+=======
+>>>>>>> 3209243d0a0b1dad49a7d9c9418dd729f60c2dbe
 
 const router = createBrowserRouter([
   {
@@ -42,11 +45,11 @@ const router = createBrowserRouter([
           },
           {
             path: "Products",
-            element: <Products/>,
+            element: <Products />,
           },
           {
             path: "Categories",
-            element: <Categories/>,
+            element: <Categories />,
           },
           {
             path: "Inventory",
